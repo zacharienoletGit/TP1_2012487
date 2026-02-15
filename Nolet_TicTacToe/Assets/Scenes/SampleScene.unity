@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 10036162}
   - component: {fileID: 10036161}
   m_Layer: 5
-  m_Name: RestJeu
+  m_Name: ButtonRecommencer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -597,6 +597,9 @@ MonoBehaviour:
   grillePrefab: {fileID: 5392925876800012892, guid: 17c291b0beae1eb428ff67cbd06eb94f, type: 3}
   raycastManager: {fileID: 316722563}
   planeManager: {fileID: 316722564}
+  ui: {fileID: 1382183897}
+  boutonRepositionner: {fileID: 1209944092}
+  boutonRecommencer: {fileID: 10036159}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,7 +1352,7 @@ GameObject:
   - component: {fileID: 1209944095}
   - component: {fileID: 1209944094}
   m_Layer: 5
-  m_Name: ButtonReset
+  m_Name: ButtonRepos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1499,6 +1502,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
   uiManager: {fileID: 1382183897}
+  couleurLigneGagnante: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  intensiteLueur: 2
+  dureePulse: 0.5
 --- !u!4 &1363839018
 Transform:
   m_ObjectHideFlags: 0
