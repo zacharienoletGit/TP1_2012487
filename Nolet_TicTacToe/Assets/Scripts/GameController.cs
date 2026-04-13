@@ -91,7 +91,7 @@ public class GameController : MonoBehaviour
         if (ligneGagnante != null)
         {
             partieTerminee = true;
-            uiManager?.ChangerTexte("Victoire Joueur " + joueurActuel);
+            uiManager?.ChangerTexte("Victoire  " + joueurActuel);
             StartCoroutine(AnimerLigneGagnante(ligneGagnante));
             return;
         }
