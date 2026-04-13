@@ -1,60 +1,94 @@
-# TicTacToe - Zacharie Nolet
-Le jeu de TicTacToe commence en laissant le joueur scanner un surface pour placer la grille. Un coup la grille plaçé, le joueur peut commençer à joueur aau TicTacToe en appuyant sur les cellules. Les tours des joueurs (joueur X et joueur O) sont alternatif. 
+# Développement d’un jeu interactif en réalité virtuelle avec Unity
 
-Unity version 6000.2.1f1
+## Auteur
+Zacharie Nolet  
+Techniques de l’informatique  
+Cégep de Victoriaville  
 
-## Capture d'écrans :
+---
 
-![Début](image-3.png)
-![Grille placée](image-2.png)
-![Gagné](image.png)
+## Contexte
 
-## Défis rencontrés :
+Ce projet a été réalisé dans le cadre du cours portant sur le développement d’environnements immersifs en réalité virtuelle. Il vise à mettre en pratique les notions vues en classe, notamment l’utilisation de Unity et des outils XR.
 
-### Commment savoir si on a gagné ?
-- J'ai demandé à l'IA de me montré la logique de détection des gagnants. Il m'a sortie les combinaison gagnantes :
-          int[,] combinaisons =
-        {
-            {0,1,2},{3,4,5},{6,7,8},
-            {0,3,6},{1,4,7},{2,5,8},
-            {0,4,8},{2,4,6}
-        };
+Le projet consiste en la création d’un jeu simple inspiré du principe « Whack-a-Mole », où l’utilisateur doit frapper des cibles apparaissant dans un environnement 3D.
 
-### La détection des plans étaient difficiles.
-- J'ai demandé à l'inteligence artificielle de me pister et elle m'a montré un autre moyen de détection d'un touché.
-  
-        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
-        {
-            if (Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
-            {
-                touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
-                hasTouch = true;
-            }
-        }
-        else if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            touchPosition = Mouse.current.position.ReadValue();
-            hasTouch = true;
-        }
+---
 
-        if (hasTouch)
-        {
-            TenterPlacement(touchPosition);
-        }
+## Objectifs du projet
 
-### Garder en mémoire les données des symboles :
-- J'ai créer une structure de données pour les symboles où je stock les données de tout les symboles instanciés.
+- Mettre en place un environnement VR fonctionnel
+- Comprendre l’utilisation du XR Interaction Toolkit
+- Implémenter des interactions physiques (collision, manipulation)
+- Structurer un projet Unity avec des scripts en C#
+- Ajouter des éléments de rétroaction (son)
 
-### Animations 
+---
 
-- J'ai demander à l'inteligence artificielle de me montrer un exemple d'animation par code pour changer la couleur de la ligne gagnant ainsi que sa grosseur et faire un "pulse" sur les symboles lorsque je les plaçe. La solution: une méthode retournant un Ienumerator utiliser dans une coroutine.
+## Technologies utilisées
 
-## Requêtes utilisées :
+- Unity
+- C#
+- XR Interaction Toolkit
+- OpenXR
+- Meta Quest (simulation)
 
-Je veux détecter toutes les combinaisons gagnantes possibles (lignes, colonnes, diagonales) dans un Tic Tac Toe 3x3 en C#. La méthode doit vérifier si le joueur actuel occupe toutes les cases d’une combinaison et renvoyer les indices de ces cases.
+---
 
-Dans mon Tic Tac Toe AR, chaque cellule est un objet 3D avec une méthode AnimerVictoire(float scale). Je veux une coroutine qui prend les indices des cellules gagnantes, désactive l’interaction, anime un pulse sur ces cellules pendant quelques secondes, puis les remet à l’échelle normale.
+## Description du fonctionnement
 
-Dans mon jeu AR Unity, je veux détecter quand le joueur touche l’écran ou clique avec la souris pour placer un objet sur un plan AR. Montre-moi le code pour récupérer la position du tap ou du clic avec le nouveau Input System.
+L’utilisateur est placé dans un environnement virtuel. Des cibles apparaissent à différents endroits.
 
-Pistes moi sur comment à animer mes cellules gagnantes.
+À l’aide d’un marteau interactif, le joueur doit frapper ces cibles.
+
+Lorsqu’une collision est détectée :
+
+- la cible est supprimée
+- un son est joué
+- le score est augmenté
+
+Le système repose sur la détection de collision et sur un gestionnaire central du jeu.
+
+---
+
+## Interactions
+
+- Manipulation d’objets en VR
+- Détection de collisions
+- Effets sonores lors des impacts
+- Interaction en temps réel avec l’environnement
+
+---
+
+## Tutoriel d’utilisation
+
+### Lancer le projet
+
+1. Ouvrir le projet dans Unity
+2. Vérifier que OpenXR est activé :
+   - Project Settings → XR Plug-in Management → OpenXR
+3. S’assurer que les profils de contrôleurs sont activés
+4. Lancer la scène principale
+
+---
+
+### Jouer
+
+1. Mettre le casque VR (ou utiliser la simulation)
+2. Utiliser les contrôleurs pour interagir
+3. Prendre le marteau avec le bouton de prise (trigger)
+4. Frapper les cibles lorsqu’elles apparaissent
+5. Observer le score augmenter
+
+---
+
+### Fonctionnement technique simplifié
+
+- Les cibles possèdent un collider
+- Le marteau possède un collider et un Rigidbody
+- Lors d’une collision :
+  - le script détecte l’objet
+  - vérifie le tag « Hammer »
+  - appelle le GameManager
+  - détruit la cible
+
