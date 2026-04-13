@@ -1,4 +1,4 @@
-# Développement d’un jeu interactif en réalité virtuelle avec Unity
+# Développement d’un jeu en réalité virtuelle avec Unity
 
 ## Auteur
 Zacharie Nolet  
